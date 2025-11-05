@@ -1,21 +1,23 @@
 const fs = require("fs");
 const path = require("path");
 
-// Package er src
 const source = path.join(__dirname, "src");
 
-// Destination: Next.js project
+// Decide destination
 let destination;
 const projectSrc = path.join(process.cwd(), "src");
+const projectApp = path.join(process.cwd(), "app");
+
 if (fs.existsSync(projectSrc)) {
-  // src already thakle -> src/redux
   destination = path.join(projectSrc, "redux");
+} else if (fs.existsSync(projectApp)) {
+  destination = path.join(projectApp, "redux");
 } else {
-  // src nai -> nirdisto src create hobe
+  // If neither exists, create src/
   destination = projectSrc;
 }
 
-// Recursive copy function
+// Recursive copy
 function copyFolderSync(from, to) {
   fs.mkdirSync(to, { recursive: true });
   const files = fs.readdirSync(from);
@@ -31,7 +33,6 @@ function copyFolderSync(from, to) {
   });
 }
 
-// Copy process
 try {
   if (fs.existsSync(source)) {
     copyFolderSync(source, destination);
