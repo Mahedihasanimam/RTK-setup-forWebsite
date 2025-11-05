@@ -1,25 +1,23 @@
 const fs = require("fs");
 const path = require("path");
 
-const source = path.join(__dirname, "src");
+const source = path.join(__dirname, "src"); // package src folder
+const projectRoot = process.cwd(); // user project folder
 
-// Decide destination
+// Decide destination dynamically
 let destination;
-const projectSrc = path.join(process.cwd(), "src");
-const projectApp = path.join(process.cwd(), "app");
-
-if (fs.existsSync(projectSrc)) {
-  destination = path.join(projectSrc, "redux");
-} else if (fs.existsSync(projectApp)) {
-  destination = path.join(projectApp, "redux");
+if (fs.existsSync(path.join(projectRoot, "src"))) {
+  destination = path.join(projectRoot, "src", "redux");
+} else if (fs.existsSync(path.join(projectRoot, "app"))) {
+  destination = path.join(projectRoot, "app", "redux");
 } else {
-  // If neither exists, create src/
-  destination = projectSrc;
+  // create src if not exists
+  destination = path.join(projectRoot, "src", "redux");
 }
 
-// Recursive copy
+// Recursive copy function
 function copyFolderSync(from, to) {
-  fs.mkdirSync(to, { recursive: true });
+  if (!fs.existsSync(to)) fs.mkdirSync(to, { recursive: true });
   const files = fs.readdirSync(from);
   files.forEach((file) => {
     const srcPath = path.join(from, file);
@@ -33,14 +31,15 @@ function copyFolderSync(from, to) {
   });
 }
 
+// Run copy
 try {
-  if (fs.existsSync(source)) {
+  if (!fs.existsSync(source)) {
+    console.log("\x1b[33mSource folder not found: src/\x1b[0m");
+  } else {
     copyFolderSync(source, destination);
     console.log(
       `\x1b[32mRTK Setup files copied to '${destination}' successfully!\x1b[0m`
     );
-  } else {
-    console.log("\x1b[33mSource folder not found: src/\x1b[0m");
   }
 } catch (error) {
   console.error("\x1b[31mError copying files:", error, "\x1b[0m");
