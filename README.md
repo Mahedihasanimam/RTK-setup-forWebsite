@@ -1,5 +1,11 @@
 # RTK Setup for Website - Documentation
 
+## Installation
+
+```text
+npm i rtk-setup-forwebsite
+```
+
 ## Project Overview
 
 `rtk-setup-forwebsite` is a **reusable Redux Toolkit + TypeScript setup** that can be easily integrated into React/Next.js projects.

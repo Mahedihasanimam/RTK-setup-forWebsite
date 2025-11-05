@@ -10,13 +10,27 @@
   },
   "name": "rtk-setup-forwebsite",
   "version": "1.0.3",
-  "description": "",
+  "description": "Redux Toolkit (RTK) + TypeScript npm package for React/Next.js with pre-configured RTK Query API slices, user token, and central store.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "redux-toolkit",
+    "nextjs",
+    "app-router",
+    "cli",
+    "state-management",
+    "boilerplate",
+    "react-redux",
+    "javascript",
+    "typescript",
+    "setup",
+    "configure",
+    "automation",
+    "frontend"
+  ],
+  "author": "Mahedi Hasan https://mehedi.wuaze.com/",
   "license": "ISC",
   "type": "commonjs"
 }
