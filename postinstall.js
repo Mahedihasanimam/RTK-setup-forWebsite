@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const source = path.join(__dirname, "src"); // package src folder
-const projectRoot = process.cwd(); // user project folder
+const projectRoot = process.cwd(); // user project root
 
 // Decide destination dynamically
 let destination;
@@ -11,8 +11,13 @@ if (fs.existsSync(path.join(projectRoot, "src"))) {
 } else if (fs.existsSync(path.join(projectRoot, "app"))) {
   destination = path.join(projectRoot, "app", "redux");
 } else {
-  // create src if not exists
   destination = path.join(projectRoot, "src", "redux");
+}
+
+// Prevent copying into itself
+if (destination.startsWith(source)) {
+  console.error("\x1b[31mError: Cannot copy folder into itself!\x1b[0m");
+  process.exit(1);
 }
 
 // Recursive copy function
@@ -22,6 +27,7 @@ function copyFolderSync(from, to) {
   files.forEach((file) => {
     const srcPath = path.join(from, file);
     const destPath = path.join(to, file);
+
     const stat = fs.statSync(srcPath);
     if (stat.isDirectory()) {
       copyFolderSync(srcPath, destPath);
