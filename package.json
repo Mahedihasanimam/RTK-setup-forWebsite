@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/react": "^19.2.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.10.1",
+    "react-redux": "^9.2.0"
+  },
+  "name": "rtk-setup-forwebsite",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
