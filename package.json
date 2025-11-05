@@ -1,6 +1,6 @@
 {
   "name": "rtk-setup-forwebsite",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Redux Toolkit (RTK) + TypeScript boilerplate for React/Next.js. Includes pre-configured RTK Query API slices, user token management, and central store setup.",
   "main": "index.js",
   "type": "commonjs",
