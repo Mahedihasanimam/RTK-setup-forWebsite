@@ -9,7 +9,7 @@
     "react-redux": "^9.2.0"
   },
   "name": "rtk-setup-forwebsite",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Redux Toolkit (RTK) + TypeScript npm package for React/Next.js with pre-configured RTK Query API slices, user token, and central store.",
   "main": "index.js",
   "scripts": {
