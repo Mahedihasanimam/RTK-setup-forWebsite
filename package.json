@@ -9,7 +9,7 @@
     "react-redux": "^9.2.0"
   },
   "name": "rtk-setup-forwebsite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
