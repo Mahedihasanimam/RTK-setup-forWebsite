@@ -1,31 +1,31 @@
-// postinstall.js
-
 const fs = require("fs");
 const path = require("path");
 
+const source = path.join(__dirname, "src");
+const destination = path.join(process.cwd(), "rtk-setup-src");
+
 function copyFolderSync(from, to) {
-  if (!fs.existsSync(from)) return;
   fs.mkdirSync(to, { recursive: true });
-  for (const item of fs.readdirSync(from)) {
-    const srcPath = path.join(from, item);
-    const destPath = path.join(to, item);
+  fs.readdirSync(from).forEach((file) => {
+    const srcPath = path.join(from, file);
+    const destPath = path.join(to, file);
     if (fs.lstatSync(srcPath).isDirectory()) {
       copyFolderSync(srcPath, destPath);
     } else {
       fs.copyFileSync(srcPath, destPath);
     }
-  }
+  });
 }
 
 try {
-  const srcPath = path.join(__dirname, "src");
-  const destPath = path.join(process.cwd(), "src");
-
-  console.log("📦 Copying RTK TypeScript setup files to project src folder...");
-
-  copyFolderSync(srcPath, destPath);
-
-  console.log("✅ RTK setup successfully installed!");
-} catch (err) {
-  console.error("❌ Error during postinstall:", err);
+  if (fs.existsSync(source)) {
+    copyFolderSync(source, destination);
+    console.log(
+      "\x1b[32m✔ RTK Setup files copied to 'rtk-setup-src/' successfully!\x1b[0m"
+    );
+  } else {
+    console.log("\x1b[33m⚠ Source folder not found: src/\x1b[0m");
+  }
+} catch (error) {
+  console.error("\x1b[31m✖ Error copying files:", error, "\x1b[0m");
 }
