@@ -1,15 +1,29 @@
 const fs = require("fs");
 const path = require("path");
 
+// Package er src
 const source = path.join(__dirname, "src");
-const destination = path.join(process.cwd(), "rtk-setup-src");
 
+// Destination: Next.js project
+let destination;
+const projectSrc = path.join(process.cwd(), "src");
+if (fs.existsSync(projectSrc)) {
+  // src already thakle -> src/redux
+  destination = path.join(projectSrc, "redux");
+} else {
+  // src nai -> nirdisto src create hobe
+  destination = projectSrc;
+}
+
+// Recursive copy function
 function copyFolderSync(from, to) {
   fs.mkdirSync(to, { recursive: true });
-  fs.readdirSync(from).forEach((file) => {
+  const files = fs.readdirSync(from);
+  files.forEach((file) => {
     const srcPath = path.join(from, file);
     const destPath = path.join(to, file);
-    if (fs.lstatSync(srcPath).isDirectory()) {
+    const stat = fs.statSync(srcPath);
+    if (stat.isDirectory()) {
       copyFolderSync(srcPath, destPath);
     } else {
       fs.copyFileSync(srcPath, destPath);
@@ -17,15 +31,16 @@ function copyFolderSync(from, to) {
   });
 }
 
+// Copy process
 try {
   if (fs.existsSync(source)) {
     copyFolderSync(source, destination);
     console.log(
-      "\x1b[32m✔ RTK Setup files copied to 'rtk-setup-src/' successfully!\x1b[0m"
+      `\x1b[32mRTK Setup files copied to '${destination}' successfully!\x1b[0m`
     );
   } else {
-    console.log("\x1b[33m⚠ Source folder not found: src/\x1b[0m");
+    console.log("\x1b[33mSource folder not found: src/\x1b[0m");
   }
 } catch (error) {
-  console.error("\x1b[31m✖ Error copying files:", error, "\x1b[0m");
+  console.error("\x1b[31mError copying files:", error, "\x1b[0m");
 }
