@@ -1,19 +1,11 @@
 {
-  "devDependencies": {
-    "@types/js-cookie": "^3.0.6",
-    "@types/react": "^19.2.2",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.10.1",
-    "react-redux": "^9.2.0"
-  },
   "name": "rtk-setup-forwebsite",
-  "version": "1.0.4",
-  "description": "Redux Toolkit (RTK) + TypeScript npm package for React/Next.js with pre-configured RTK Query API slices, user token, and central store.",
+  "version": "1.0.6",
+  "description": "Redux Toolkit (RTK) + TypeScript boilerplate for React/Next.js. Includes pre-configured RTK Query API slices, user token management, and central store setup.",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "node postinstall.js"
   },
   "keywords": [
     "redux-toolkit",
@@ -30,7 +22,25 @@
     "automation",
     "frontend"
   ],
-  "author": "Mahedi Hasan https://mehedi.wuaze.com/",
+  "author": {
+    "name": "Mahedi Hasan",
+    "url": "https://mehedi.wuaze.com/"
+  },
   "license": "ISC",
-  "type": "commonjs"
+  "files": [
+    "src",
+    "index.js",
+    "postinstall.js",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.10.1",
+    "react-redux": "^9.2.0"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/react": "^19.2.2",
+    "typescript": "^5.9.3"
+  }
 }
